@@ -59,6 +59,7 @@ def run_tests(script_path, instance_url, api_key, project_key):
     result = subprocess.run([
         'pytest',
         '-v',
+        '-s',
         script_path,
         '--no-header',  # Minimize output noise
         '--tb=short'    # Shorter traceback format
