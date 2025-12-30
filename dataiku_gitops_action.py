@@ -135,15 +135,15 @@ def deploy(infra_id):
 
 def main():
     try:
-        dataiku_sha = get_dataiku_latest_commit(client_dev, DATAIKU_PROJECT_KEY)
-        git_sha = get_git_sha()
-        if dataiku_sha != git_sha:
-            print(f"Dataiku commit SHA ({dataiku_sha}) doesn't match Git SHA ({git_sha})")
-            sync_dataiku_to_git(client_dev, DATAIKU_PROJECT_KEY)
-            print("Pushed Dataiku changes to Git. Restarting process.")
-            sys.exit(0)
+        #dataiku_sha = get_dataiku_latest_commit(client_dev, DATAIKU_PROJECT_KEY)
+        #git_sha = get_git_sha()
+        #if dataiku_sha != git_sha:
+        #    print(f"Dataiku commit SHA ({dataiku_sha}) doesn't match Git SHA ({git_sha})")
+        #    sync_dataiku_to_git(client_dev, DATAIKU_PROJECT_KEY)
+        #    print("Pushed Dataiku changes to Git. Restarting process.")
+        #    sys.exit(0)
 
-        deploy(DATAIKU_INFRA_ID_STAGING)
+        #deploy(DATAIKU_INFRA_ID_STAGING)
 
         # Run tests on Staging instance
         if run_tests(PYTHON_SCRIPT, DATAIKU_INSTANCE_STAGING_URL, DATAIKU_API_TOKEN_STAGING, DATAIKU_PROJECT_KEY):
