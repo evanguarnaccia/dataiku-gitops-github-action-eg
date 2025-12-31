@@ -144,7 +144,7 @@ def main():
         #    print("Pushed Dataiku changes to Git. Restarting process.")
         #    sys.exit(0)
 
-        #deploy(DATAIKU_INFRA_ID_STAGING)
+        deploy(DATAIKU_INFRA_ID_STAGING)
 
         # Run tests on Staging instance
         if run_tests(PYTHON_SCRIPT, DATAIKU_INSTANCE_STAGING_URL, DATAIKU_API_TOKEN_STAGING, DATAIKU_PROJECT_KEY):
