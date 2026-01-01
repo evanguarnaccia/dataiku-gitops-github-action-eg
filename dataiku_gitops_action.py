@@ -41,7 +41,16 @@ def get_commit_id():
     return result.stdout.strip()
 
 def generate_bundle_id(commit_id):
-    return f"bundle_{commit_id[:8]}"
+    """
+    Generates a unique Bundle ID using Git SHA + Timestamp.
+    Example: bundle_a1b2c3d4_2023-10-27_14-30-05
+    """
+    # 1. Get current time in a safe filename format (YYYY-MM-DD_HH-MM-SS)
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    
+    # 2. Combine shortened Commit ID with the Timestamp
+    # We keep the commit ID for traceability, but the timestamp ensures uniqueness
+    return f"bundle_{commit_id[:8]}_{timestamp}"
 
 def export_bundle(client, project_key, bundle_id, release_notes=None):
     project = client.get_project(project_key)
@@ -112,6 +121,7 @@ def deploy(infra_id):
     """Deploy to production using bundle and deployer."""
     try:
         commit_id = get_git_sha()
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         bundle_id = generate_bundle_id(commit_id)
         project = client_dev.get_project(DATAIKU_PROJECT_KEY)
         project.export_bundle(bundle_id)
