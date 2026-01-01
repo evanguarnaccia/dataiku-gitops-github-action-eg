@@ -112,8 +112,7 @@ def deploy(infra_id):
     """Deploy to production using bundle and deployer."""
     try:
         commit_id = get_git_sha()
-        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        bundle_id = f"{generate_bundle_id(commit_id)}_{int(time.time())}"
+        bundle_id = generate_bundle_id(commit_id)
         project = client_dev.get_project(DATAIKU_PROJECT_KEY)
         project.export_bundle(bundle_id)
         
