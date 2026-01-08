@@ -159,8 +159,12 @@ def main():
 
         deploy(DATAIKU_INFRA_ID_STAGING)
 
+        if DEPLOY_WITHOUT_TESTS:
+            print("Deployed without checking W&B for ML moodel(s)")
+            deploy(DATAIKU_INFRA_ID_PROD)
+
         # Run tests on Staging instance
-        if run_tests(PYTHON_SCRIPT, DATAIKU_INSTANCE_STAGING_URL, DATAIKU_API_TOKEN_STAGING, DATAIKU_PROJECT_KEY):
+        if run_tests(PYTHON_SCRIPT, DATAIKU_INSTANCE_STAGING_URL, DATAIKU_API_TOKEN_STAGING, DATAIKU_PROJECT_KEY) and not DEPLOY_WITHOUT_TESTS:
             if RUN_TESTS_ONLY:
                 print("Tests passed in staging. Skipping deployment to production.")
             else:
