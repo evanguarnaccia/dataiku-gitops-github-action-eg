@@ -31,6 +31,9 @@ inputs:
   dataiku_infra_id_prod:
     description: "Infra ID for the Prod instance"
     required: true
+  deploy_without_tests:
+    despription: "Deploy without running tests.py"
+    required: true
   run_tests_only:
     description: "Run tests only on staging"
     required: false
