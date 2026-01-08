@@ -25,7 +25,7 @@ DATAIKU_INSTANCE_PROD_URL = os.getenv('DATAIKU_INSTANCE_PROD_URL')
 DATAIKU_PROJECT_KEY = os.getenv('DATAIKU_PROJECT_KEY')
 DATAIKU_INFRA_ID_STAGING = os.getenv('DATAIKU_INFRA_ID_STAGING')
 DATAIKU_INFRA_ID_PROD = os.getenv('DATAIKU_INFRA_ID_PROD')
-DEPLOY_WITHOUT_TESTS = os.getenv('DEPLOY_WITHOUT_TESTS')
+DEPLOY_WITHOUT_TESTS = os.getenv('DEPLOY_WITHOUT_TESTS', 'false').lower() == 'true'
 RUN_TESTS_ONLY = os.getenv('RUN_TESTS_ONLY', 'false').lower() == 'true'
 PYTHON_SCRIPT = os.getenv('PYTHON_SCRIPT', 'tests.py')
 CLIENT_CERTIFICATE = os.getenv('CLIENT_CERTIFICATE', None)
@@ -157,7 +157,7 @@ def main():
 
         deploy(DATAIKU_INFRA_ID_STAGING)
 
-        if DEPLOY_WITHOUT_TESTS:
+        if os.getenv('DEPLOY_WITHOUT_TESTS', 'false').lower() == 'true':
             print(f"DEPLOY_WITHOUT_TESTS is currently: {DEPLOY_WITHOUT_TESTS}")
             print("Deployed without checking W&B for ML moodel(s)")
             deploy(DATAIKU_INFRA_ID_PROD)
