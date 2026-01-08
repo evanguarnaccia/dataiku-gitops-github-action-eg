@@ -158,6 +158,7 @@ def main():
         deploy(DATAIKU_INFRA_ID_STAGING)
 
         if DEPLOY_WITHOUT_TESTS:
+            print(f"DEPLOY_WITHOUT_TESTS is currently: {DEPLOY_WITHOUT_TESTS}")
             print("Deployed without checking W&B for ML moodel(s)")
             deploy(DATAIKU_INFRA_ID_PROD)
 
